@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0c169acc-7236-4a09-8171-aa00202e2bd1" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZdPpWeeCfAmLxpwGzo7AR81bv2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="ASSIGNMENT_7" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ASSIGNMENT_7" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ASSIGNMENT_7.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.ASSIGNMENT_7" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c169acc-7236-4a09-8171-aa00202e2bd1" name="Default Changelist" comment="" />
+      <created>1585166180353</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585166180353</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1577" height="219" key="GridCell.Tab.0.bottom" timestamp="1585526316659">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1577" height="219" key="GridCell.Tab.0.bottom/0.27.1600.873@0.27.1600.873" timestamp="1585526316659" />
+    <state width="1577" height="219" key="GridCell.Tab.0.center" timestamp="1585526316658">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1577" height="219" key="GridCell.Tab.0.center/0.27.1600.873@0.27.1600.873" timestamp="1585526316658" />
+    <state width="1577" height="219" key="GridCell.Tab.0.left" timestamp="1585526316657">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1577" height="219" key="GridCell.Tab.0.left/0.27.1600.873@0.27.1600.873" timestamp="1585526316657" />
+    <state width="1577" height="219" key="GridCell.Tab.0.right" timestamp="1585526316659">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1577" height="219" key="GridCell.Tab.0.right/0.27.1600.873@0.27.1600.873" timestamp="1585526316659" />
+    <state width="1577" height="272" key="GridCell.Tab.1.bottom" timestamp="1585188047014">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1577" height="272" key="GridCell.Tab.1.bottom/0.27.1600.873@0.27.1600.873" timestamp="1585188047014" />
+    <state width="1577" height="272" key="GridCell.Tab.1.center" timestamp="1585188047009">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1577" height="272" key="GridCell.Tab.1.center/0.27.1600.873@0.27.1600.873" timestamp="1585188047009" />
+    <state width="1577" height="272" key="GridCell.Tab.1.left" timestamp="1585188047008">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1577" height="272" key="GridCell.Tab.1.left/0.27.1600.873@0.27.1600.873" timestamp="1585188047008" />
+    <state width="1577" height="272" key="GridCell.Tab.1.right" timestamp="1585188047012">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="1577" height="272" key="GridCell.Tab.1.right/0.27.1600.873@0.27.1600.873" timestamp="1585188047012" />
+    <state x="289" y="97" key="SettingsEditor" timestamp="1585522035341">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state x="289" y="97" key="SettingsEditor/0.27.1600.873@0.27.1600.873" timestamp="1585522035341" />
+    <state width="800" height="437" key="XDebugger.FullValuePopup" timestamp="1585518277477">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state width="800" height="437" key="XDebugger.FullValuePopup/0.27.1600.873@0.27.1600.873" timestamp="1585518277477" />
+    <state x="463" y="212" width="672" height="678" key="search.everywhere.popup" timestamp="1585516586588">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state x="463" y="212" width="672" height="678" key="search.everywhere.popup/0.27.1600.873@0.27.1600.873" timestamp="1585516586588" />
+  </component>
+</project>
