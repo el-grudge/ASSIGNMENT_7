@@ -1,14 +1,14 @@
+import os
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 from surprise import Dataset
 from surprise import Reader
 from surprise import SVD
 from surprise import NMF
 from surprise import KNNBasic
 from surprise.model_selection import cross_validate
-import os
-import random
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
 
 my_seed = 0
 random.seed(my_seed)
@@ -44,15 +44,15 @@ for key in performance:
 
 metrics = pd.DataFrame(metrics, columns=['Fold', 'Algorithm', 'RMSE', 'MAE'])
 
-print(metrics[metrics['Fold']==0])
-print(metrics[metrics['Fold']==1])
-print(metrics[metrics['Fold']==2])
+print(metrics[metrics['Fold'] == 0])
+print(metrics[metrics['Fold'] == 1])
+print(metrics[metrics['Fold'] == 2])
 print(metrics.groupby('Algorithm').mean())
-'''
+
 metrics_similarity = []
 algorithms = ['ucf', 'icf']
 similarity = ['msd', 'cosine', 'pearson']
-'''
+
 for i in algorithms:
     for j in similarity:
         if i == 'ucf':
@@ -66,19 +66,21 @@ for i in algorithms:
 
 metrics_similarity = pd.DataFrame(metrics_similarity, columns=['Algorithm', 'Similarity', 'RMSE', 'MAE'])
 
-metrics_similarity[metrics_similarity.columns.difference(['MAE'])].pivot('Similarity', 'Algorithm', 'RMSE').plot(kind='bar')
+metrics_similarity[metrics_similarity.columns.difference(['MAE'])].pivot('Similarity', 'Algorithm', 'RMSE').plot(
+    kind='bar')
 plt.ylabel('RMSE')
 plt.ylim(0.9, 1.1)
 plt.xticks(rotation=0)
 plt.show()
 
-metrics_similarity[metrics_similarity.columns.difference(['RMSE'])].pivot('Similarity', 'Algorithm', 'MAE').plot(kind='bar')
+metrics_similarity[metrics_similarity.columns.difference(['RMSE'])].pivot('Similarity', 'Algorithm', 'MAE').plot(
+    kind='bar')
 plt.ylabel('MAE')
 plt.ylim(0.7, 0.9)
 plt.xticks(rotation=0)
 plt.show()
 
-neighbors = [5,10,15,20,25,30,35,40,45]
+neighbors = [5, 10, 15, 20, 25, 30, 35, 40, 45]
 metrics_neighbors = []
 
 for i in algorithms:
@@ -94,6 +96,7 @@ for i in algorithms:
 metrics_neighbors = pd.DataFrame(metrics_neighbors, columns=['Algorithm', 'Neighbours', 'RMSE'])
 
 metrics_neighbors[metrics_neighbors.columns.difference(['MAE'])].pivot('Neighbours', 'Algorithm', 'RMSE').plot()
-plt.ylim(0.9,1.0)
+plt.ylim(0.9, 1.0)
+plt.ylabel('RMSE')
 plt.xticks(rotation=0)
 plt.show()
