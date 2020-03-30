@@ -17,7 +17,7 @@ np.random.seed(my_seed)
 file_path = os.path.expanduser('restaurant_ratings.txt')
 reader = Reader(line_format='user item rating timestamp', sep='\t')
 data = Dataset.load_from_file(file_path, reader=reader)
-
+'''
 svd = SVD()
 pmf = SVD(biased=False)
 nmf = NMF()
@@ -48,11 +48,11 @@ print(metrics[metrics['Fold'] == 0])
 print(metrics[metrics['Fold'] == 1])
 print(metrics[metrics['Fold'] == 2])
 print(metrics.groupby('Algorithm').mean())
-
+'''
 metrics_similarity = []
 algorithms = ['ucf', 'icf']
 similarity = ['msd', 'cosine', 'pearson']
-
+'''
 for i in algorithms:
     for j in similarity:
         if i == 'ucf':
@@ -68,6 +68,7 @@ metrics_similarity = pd.DataFrame(metrics_similarity, columns=['Algorithm', 'Sim
 
 metrics_similarity[metrics_similarity.columns.difference(['MAE'])].pivot('Similarity', 'Algorithm', 'RMSE').plot(
     kind='bar')
+plt.title('RMSE For User CF vs Item CF')
 plt.ylabel('RMSE')
 plt.ylim(0.9, 1.1)
 plt.xticks(rotation=0)
@@ -75,11 +76,12 @@ plt.show()
 
 metrics_similarity[metrics_similarity.columns.difference(['RMSE'])].pivot('Similarity', 'Algorithm', 'MAE').plot(
     kind='bar')
+plt.title('MAE For User CF vs Item CF')
 plt.ylabel('MAE')
 plt.ylim(0.7, 0.9)
 plt.xticks(rotation=0)
 plt.show()
-
+'''
 neighbors = [5, 10, 15, 20, 25, 30, 35, 40, 45]
 metrics_neighbors = []
 
@@ -89,14 +91,16 @@ for i in algorithms:
             user_based = True
         else:
             user_based = False
-        cf = KNNBasic(sim_options={'name': 'MSD', 'user_based': user_based})
-        metric = cross_validate(cf, data, measures=['RMSE', 'MAE'], cv=k, verbose=False)
+        cf = KNNBasic(k=k, sim_options={'name': 'MSD', 'user_based': user_based})
+        metric = cross_validate(cf, data, measures=['RMSE', 'MAE'], cv=3, verbose=False)
         metrics_neighbors.append([i, k, np.mean(metric['test_rmse'])])
 
 metrics_neighbors = pd.DataFrame(metrics_neighbors, columns=['Algorithm', 'Neighbours', 'RMSE'])
 
 metrics_neighbors[metrics_neighbors.columns.difference(['MAE'])].pivot('Neighbours', 'Algorithm', 'RMSE').plot()
-plt.ylim(0.9, 1.0)
+plt.title('RMSE For User CF vs Item CF With Different K Values')
+#plt.ylim(0.9, 1.0)
 plt.ylabel('RMSE')
 plt.xticks(rotation=0)
 plt.show()
+
