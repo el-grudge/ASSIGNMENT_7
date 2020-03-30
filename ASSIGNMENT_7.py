@@ -1,5 +1,3 @@
-# 1: pip install scikit-surprise
-# 2: download dataset
 from surprise import Dataset
 from surprise import Reader
 from surprise import SVD
@@ -16,89 +14,66 @@ my_seed = 0
 random.seed(my_seed)
 np.random.seed(my_seed)
 
-# 3: load data from a file
-performance = {}
 file_path = os.path.expanduser('restaurant_ratings.txt')
 reader = Reader(line_format='user item rating timestamp', sep='\t')
 data = Dataset.load_from_file(file_path, reader=reader)
 
-# 4: metrics MAE & RMSE
-# 5: SVD
 svd = SVD()
-performance['svd'] = cross_validate(svd, data, measures=['RMSE', 'MAE'], cv=3, verbose=True)
-
-# 6: PMF
 pmf = SVD(biased=False)
-performance['pmf'] = cross_validate(pmf, data, measures=['RMSE', 'MAE'], cv=3, verbose=True)
-
-# 7: NMF
 nmf = NMF()
-performance['nmf'] = cross_validate(nmf, data, measures=['RMSE', 'MAE'], cv=3, verbose=True)
+ucf = KNNBasic(sim_options={'user_based': True})
+icf = KNNBasic(sim_options={'user_based': False})
 
-# 8: User Based Collaborative Filtering
-ucf = KNNBasic(sim_options={
-    'user_based': True
-})
-performance['ucf'] = cross_validate(ucf, data, measures=['RMSE', 'MAE'], cv=3, verbose=True)
+recommenders = {
+    'svd': svd,
+    'pmf': pmf,
+    'nmf': nmf,
+    'ucf': ucf,
+    'icf': icf
+}
 
-# 9: Item Based Collaborative Filtering
-icf = KNNBasic(sim_options={
-    'user_based': False
-})
-performance['icf'] = cross_validate(icf, data, measures=['RMSE', 'MAE'], cv=3, verbose=True)
+performance = {}
+for key, value in recommenders.items():
+    print(key)
+    performance[key] = cross_validate(value, data, measures=['RMSE', 'MAE'], cv=3, verbose=True)
 
-# 10: Performance Comparison Fold 1
+metrics = []
 for key in performance:
-    print(key, '=', performance[key]['test_rmse'][0])
+    for i in range(0, 3):
+        metrics.append([i, key, performance[key]['test_rmse'][i], performance[key]['test_mae'][i]])
 
-# 11: Performance Comparison Fold 2
-for key in performance:
-    print(key, '=', performance[key]['test_rmse'][1])
+metrics = pd.DataFrame(metrics, columns=['Fold', 'Algorithm', 'RMSE', 'MAE'])
 
-# 12: Performance Comparison Fold 3
-for key in performance:
-    print(key, '=', performance[key]['test_rmse'][2])
+print(metrics[metrics['Fold']==0])
+print(metrics[metrics['Fold']==1])
+print(metrics[metrics['Fold']==2])
+print(metrics.groupby('Algorithm').mean())
 
-# 13: Performance Comparison Mean
-for key in performance:
-    print(key, '=', np.mean(performance[key]['test_rmse']))
+metrics_similarity = []
+algorithms = ['ucf', 'icf']
+similarity = ['msd', 'cosine', 'pearson']
 
-# 14: Similarity
+for i in algorithms:
+    for j in similarity:
+        if i == 'ucf':
+            user_based = True
+        else:
+            user_based = False
+        cf = KNNBasic(sim_options={'name': j, 'user_based': user_based})
+        metric = cross_validate(cf, data, measures=['RMSE', 'MAE'], cv=3, verbose=False)
+        print(np.mean(metric['test_rmse']))
+        metrics_similarity.append([i, j, np.mean(metric['test_rmse']), np.mean(metric['test_mae'])])
 
-similarity = ['MSD', 'cosine', 'pearson']
-rmse = []
-mae = []
+metrics_similarity = pd.DataFrame(metrics_similarity, columns=['Algorithm', 'Similarity', 'RMSE', 'MAE'])
 
-for i in similarity:
-    ucf = KNNBasic(sim_options={
-        'name': i,
-        'user_based': True
-    })
-    performance['ucf'] = cross_validate(ucf, data, measures=['RMSE', 'MAE'], cv=3, verbose=True)
-
-    icf = KNNBasic(sim_options={
-        'name': i,
-        'user_based': False
-    })
-    performance['icf'] = cross_validate(icf, data, measures=['RMSE', 'MAE'], cv=3, verbose=True)
-
-    rmse.append([i, np.mean(performance['ucf']['test_rmse']), np.mean(performance['icf']['test_rmse'])])
-    mae.append([i, np.mean(performance['ucf']['test_mae']), np.mean(performance['icf']['test_mae'])])
-
-rmse_df = pd.DataFrame(rmse, columns=['Similarity', 'UCF_RMSE', 'ICF_RMSE'])
-mae_df = pd.DataFrame(mae, columns=['Similarity', 'UCF_MAE', 'ICF_MAE'])
-
-rmse_df.plot(kind="bar")
-plt.ylabel("RMSE")
+metrics_similarity[metrics_similarity.columns.difference(['MAE'])].pivot('Similarity', 'Algorithm', 'RMSE').plot(kind='bar')
+plt.ylabel('RMSE')
 plt.ylim(0.9, 1.1)
-plt.xticks([0, 1, 2], similarity, rotation=0)
+plt.xticks(rotation=0)
 plt.show()
 
-mae_df.plot(kind="bar")
-plt.ylabel("RMSE")
-plt.ylim(0.7, 0.8)
-plt.xticks([0, 1, 2], similarity, rotation=0)
+metrics_similarity[metrics_similarity.columns.difference(['RMSE'])].pivot('Similarity', 'Algorithm', 'MAE').plot(kind='bar')
+plt.ylabel('MAE')
+plt.ylim(0.7, 0.9)
+plt.xticks(rotation=0)
 plt.show()
-
-
-# 15: Number of k
