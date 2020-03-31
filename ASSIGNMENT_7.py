@@ -17,7 +17,7 @@ np.random.seed(my_seed)
 file_path = os.path.expanduser('restaurant_ratings.txt')
 reader = Reader(line_format='user item rating timestamp', sep='\t')
 data = Dataset.load_from_file(file_path, reader=reader)
-'''
+
 svd = SVD()
 pmf = SVD(biased=False)
 nmf = NMF()
@@ -48,11 +48,11 @@ print(metrics[metrics['Fold'] == 0])
 print(metrics[metrics['Fold'] == 1])
 print(metrics[metrics['Fold'] == 2])
 print(metrics.groupby('Algorithm').mean())
-'''
+
 metrics_similarity = []
 algorithms = ['ucf', 'icf']
 similarity = ['msd', 'cosine', 'pearson']
-'''
+
 for i in algorithms:
     for j in similarity:
         if i == 'ucf':
@@ -81,7 +81,7 @@ plt.ylabel('MAE')
 plt.ylim(0.7, 0.9)
 plt.xticks(rotation=0)
 plt.show()
-'''
+
 neighbors = [5, 10, 15, 20, 25, 30, 35, 40, 45]
 metrics_neighbors = []
 
